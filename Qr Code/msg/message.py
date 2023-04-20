@@ -24,8 +24,6 @@ except ModuleNotFoundError:
     os.system('pip install rich')
 
 finally:
-    from rich import print as rprint
-
     def title_set_color(msg: str):
         return f'[blue]{msg}[/blue]'
     

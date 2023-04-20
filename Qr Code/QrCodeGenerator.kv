@@ -1,0 +1,74 @@
+MainPanel:
+
+<MainPanel>:
+    BoxLayout:
+        size: root.size
+
+    RelativeLayout:
+        canvas:
+            #TOP FRAME
+            Color:
+                rgb: 240 , 248 , 255
+            Rectangle:
+                pos: 0, self.height/2
+                size: self.width, self.height/2
+    
+    RelativeLayout:
+        canvas:
+            #BOTTOM FRAME 
+            Color:
+                rgb: .214, .241, .255
+            Rectangle:
+                size: self.width, self.height/2
+
+    #TOP FRAME
+    Label:
+        text:'QR Code Generator'
+        color: 0 , 0 , 0 , 1
+        font_size: dp(50)
+        font_name: 'assets/fonts/Eurostile.ttf'
+        pos_hint: { "center_x": .5, "center_y": .77 }
+
+    TextInput:
+        id: input_set
+        placeholder:'Insira algum link...'
+        pos_hint: { "center_x": .45, "center_y": .6 }
+        size_hint: .5, .05
+
+    Button:
+        text:'To Convert'
+        size_hint: .1, .055
+        pos_hint: { "center_x": .75, "center_y": .6 }
+        on_press: root.selected_link(input_set.text)
+    # ======================================== END OF TOP FRAME
+
+    #BOTTOM FRAME
+    Label:
+        text: root.link_set
+        color: 0 , 0 , 0 , 1
+        font_size: dp(40)
+        font_name: 'assets/fonts/Eurostile.ttf'
+        pos_hint: { "center_x": .65, "center_y": .40 }
+
+    Label:
+        text: root.msg_subtitle
+        color: 0 , 0 , 0 , 1
+        font_size: dp(15)
+        font_name: 'assets/fonts/Eurostile.ttf'
+        pos_hint: { "center_x": .65, "center_y": .30 }
+
+    # Image:
+    #     pos: dp(50), dp(20)
+    #     size: dp(250), dp(250)
+    #     source: root.image_source
+    
+    RelativeLayout:
+        canvas:
+            Color:
+                rgb: .214, .241, .255
+            Rectangle:
+                id: background_image_rect
+                pos: dp(50), dp(20)
+                size: dp(250), dp(250)
+                source: root.image_source
+    # ======================================== END OF BOTTOM FRAME
