@@ -53,17 +53,12 @@ MainPanel:
     Label:
         text: root.msg_subtitle
         color: 0 , 0 , 0 , 1
-        font_size: dp(15)
+        font_size: dp(8)
         font_name: 'assets/fonts/Eurostile.ttf'
         pos_hint: { "center_x": .65, "center_y": .30 }
-
-    # Image:
-    #     pos: dp(50), dp(20)
-    #     size: dp(250), dp(250)
-    #     source: root.image_source
     
     RelativeLayout:
-        canvas:
+        canvas.before:
             Color:
                 rgb: .214, .241, .255
             Rectangle:

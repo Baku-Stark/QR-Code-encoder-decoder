@@ -11,9 +11,10 @@ try:
     Config.set('graphics', 'resizable', False)
 
     from kivy.app import App
-    from kivy.uix.image import Image
-    from kivy.uix.screenmanager import Screen
+    from kivy.lang import Builder
     from kivy.properties import StringProperty
+    from kivy.properties import ObjectProperty
+    from kivy.uix.relativelayout import RelativeLayout
     # ====================== END OF KIVY
 
 except ModuleNotFoundError:
@@ -33,7 +34,8 @@ finally:
     # IMPORT [message.py]
     from msg import message
     # ====================== IMPORT
-    class MainPanel(Screen):
+    # Builder.load_file("QrCodeGenerator.kv")
+    class MainPanel(RelativeLayout):
         """
             Classe principal dos widgets.
 
@@ -44,9 +46,13 @@ finally:
 
                 pass
         """
+
         msg_subtitle = StringProperty("---")
         link_set = StringProperty("Esperando...")
-        image_source = StringProperty("assets/code/url_qrcode.png")
+        image_source = StringProperty("assets/img/kiv_logo.png")
+
+        # objeto do arquivo QrCodeGenerator.kv -> Rectangle
+        background_image_rect = ObjectProperty()
 
         def qrcode_generator(self, msg_ctx:str, color:str):
             """
@@ -64,6 +70,7 @@ finally:
             """
 
             # https://kivy.org/ [teste link]
+            self.image_source = 'assets/code/kiv_logo.png'
 
             qr_code = qrcode.QRCode(
                 version=1,
@@ -89,22 +96,13 @@ finally:
 
             img.save('assets/code/url_qrcode.png')
 
-            messagebox.showinfo(
-                title="QR Code",
-                message="O QR Code foi gerado com sucesso!"
-            )
-
             link_encode = base64.b64encode((msg_ctx).encode('ascii'))
 
             self.link_set = "LINK DA CONVERSÃO"
             self.msg_subtitle = str(link_encode)[2:-1]
             self.image_source = 'assets/code/url_qrcode.png'
 
-            image_dir = Image(
-                source=self.image_source
-            )
-
-            image_dir.reload()
+            # self.background_image_rect.source = self.image_source
         
         def selected_link(self, msg:str):
             """
